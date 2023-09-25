@@ -16,7 +16,10 @@
   # File, glob and dir filespecs are similar in principle to their
   # command-line counterparts.
 
-
+  # how many lines of code are displayed at once in the GUI terminal
+  # 0 means all of them
+  lines-of-history = 0
+  
   [commands]
 
     [commands.tail]

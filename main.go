@@ -88,6 +88,7 @@ const defaultTomlConfig = `
   title = "Tailon file viewer"
   relative-root = "/"
   listen-addr = [":8080"]
+  lines-of-history = 0
   allow-download = true
   allow-commands = ["tail", "grep", "sed", "awk"]
 
@@ -202,6 +203,8 @@ type Config struct {
 	ConfigPath        string
 	WrapLinesInitial  bool
 	TailLinesInitial  int
+        
+        LinesOfHistory    int64
 	AllowCommandNames []string
 	AllowDownload     bool
 
@@ -223,6 +226,7 @@ func makeConfig(configContent string) *Config {
 	config := Config{
 		BindAddr:      addrsB,
 		RelativeRoot:  defaults.Get("relative-root").(string),
+                LinesOfHistory: defaults.Get("lines-of-history").(int64),
 		AllowDownload: defaults.Get("allow-download").(bool),
 		CommandSpecs:  commandSpecs,
 	}
@@ -242,6 +246,7 @@ func main() {
 
 	flag.StringVarP(&config.RelativeRoot, "relative-root", "r", config.RelativeRoot, "webapp relative root")
 	flag.BoolVarP(&config.AllowDownload, "allow-download", "a", config.AllowDownload, "allow file downloads")
+        flag.Int64Var(&config.LinesOfHistory, "history-lines", config.LinesOfHistory, "No. of history lines to tail.")
 	flag.StringVarP(&config.ConfigPath, "config", "c", "", "")
 	flag.Parse()
 
