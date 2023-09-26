@@ -151,7 +151,6 @@ func parseTomlConfig(config string) (*toml.Tree, map[string]CommandSpec, []FileS
 		}
 		commands[key] = command
 	}
-	println(cfg.Get("files"))
         cfgFiles := cfg.Get("files").(*toml.Tree).ToMap()
 	filespecs := make([]FileSpec, 0)
 	for _, value := range cfgFiles {

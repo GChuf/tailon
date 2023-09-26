@@ -1,12 +1,28 @@
 FROM golang:alpine as build
-ADD . /go/src/github.com/gvalkov/tailon/
-RUN apk add --upgrade git upx binutils
-RUN cd /go/src/github.com/gvalkov/tailon && go get && go build && strip tailon && upx tailon
 
-FROM alpine:3.7
 WORKDIR /tailon
-COPY . /usr/local/bin/tailon
+
+ADD . .
+
+RUN apk add --upgrade binutils
+
+RUN cd /tailon && \
+    go get
+RUN go build -tags dev
+RUN strip tailon
+
+RUN apk del binutils
+
+FROM alpine:latest
+
+RUN apk add gawk grep sed
+
+#COPY --from=build /tailon/tailon /usr/local/bin/tailon
+COPY --from=build /tailon/tailon /tailon/tailon
+COPY --from=build /tailon/frontend/ /tailon/frontend/
 
 CMD        ["--help"]
-ENTRYPOINT ["/usr/local/bin/tailon"]
+#CMD ["tail", "-f", "/dev/null"]
+WORKDIR /tailon
+ENTRYPOINT ["./tailon"]
 EXPOSE 8080

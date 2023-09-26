@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"github.com/gorilla/handlers"
-	"github.com/gchuf/tailon/cmd"
-	"github.com/gchuf/tailon/frontend"
+	"tailon/cmd"
+	"tailon/frontend"
 	"github.com/shurcooL/httpfs/html/vfstemplate"
 	"github.com/shurcooL/httpgzip"
 	"gopkg.in/igm/sockjs-go.v3/sockjs"

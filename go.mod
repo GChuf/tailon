@@ -1,4 +1,4 @@
-module github.com/gchuf/tailon
+module tailon
 
 go 1.19
 
@@ -16,7 +16,7 @@ require (
 	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/igm/sockjs-go v3.0.2+incompatible // indirect
-	github.com/shurcooL/vfsgen v0.0.0-20200824052919-0d455de96546 // indirect
+	github.com/shurcooL/vfsgen v0.0.0-20230704071429-0000e147ea92 // indirect
 	golang.org/x/net v0.5.0 // indirect
 	golang.org/x/text v0.6.0 // indirect
 	golang.org/x/tools v0.5.0 // indirect

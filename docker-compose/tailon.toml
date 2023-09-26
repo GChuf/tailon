@@ -5,7 +5,7 @@
   relative-root = "/"
 
   # The addresses to listen on. Can be an address:port combination or an unix socket.
-  listen-addr = ["127.0.0.1:8080"]
+  listen-addr = ["0.0.0.0:8080"]
 
   # Allow download of know files (only those matched by a filespec).
   allow-download = true
@@ -22,6 +22,10 @@
  
   # how many lines will tail start with. +1 means all of tehm, aka, start at the first line
   lines-to-tail = 3000
+
+  [files]
+    file = "logs_tailon/"
+    #filei2 = "alias=test,group=test_group,log.log"
  
   [commands]
 

@@ -5,7 +5,7 @@
   relative-root = "/"
 
   # The addresses to listen on. Can be an address:port combination or an unix socket.
-  listen-addr = ["127.0.0.1:9001"]
+  listen-addr = ["127.0.0.1:9002"]
 
   # Allow download of know files (only those matched by a filespec).
   allow-download = true
@@ -24,7 +24,7 @@
   lines-to-tail = 3001
 
   [files]
-    file = "stdata/ex1/var/log/"
+    file = "testdata/ex1/var/log/4.log"
     #filei2 = "alias=test,group=test_group,log.log"
  
   [commands]
