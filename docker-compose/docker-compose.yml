@@ -8,6 +8,5 @@ services:
     volumes:
       - "./logs_tailon:/tailon/logs_tailon"
       - "./tailon.toml:/tailon/tailon.toml"
-    #command: /tailon/logs_tailon/* -c /tailon/tailon.toml
-    command:  -c /tailon/tailon.toml
+    command: /tailon/logs_tailon/* -c /tailon/tailon.toml
     restart: unless-stopped
