@@ -144,7 +144,6 @@ func wsWriter(session sockjs.Session, messages chan string, done <-chan struct{}
 					procA = exec.Command(actionA[0], actionA[1:]...)
 					log.Print("Running command: ", actionA)
 				}
-
 				actionB := config.CommandSpecs[msgJSON.Command].Action
 				actionB = expandCommandArgs(actionB, msgJSON)
 				procB = cmd.NewCmdOptions(cmdOptions, actionB[0], actionB[1:]...)

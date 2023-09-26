@@ -1,3 +1,131 @@
 10
 11
 12
+ibex4.exceptions.IbexException: TypeInitializationException The type initializer for 'Gdip' threw an exception.
+   at ibex4.imageloaders.ImageLoader.load(RenderingContext rc, ObjectWithAttributes containing_fo, String fileName, Int32 selectedPage)
+   at ibex4.renderer.RenderingContext.getImage(String url, ObjectWithAttributes containing_fo, Int32 dpi, ExtendedMap`2 raw_attributes)
+   at ibex4.xml.tags.ExternalGraphicTag.start(RenderingContext rc, XMLContext context, ExtendedMap`2 attrs)
+   at ibex4.reading.ps.FlowReader.advance(RenderingContext rc, Int32 desiredElements)
+   at ibex4.reading.ps.MultiFlowReader.advance(RenderingContext rc, Int32 nodesToRead, ObjectWithAttributes[] stackbase)
+   at ibex4.creation.PDFCreator.layoutOneRegion(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.layoutAllRegionsInFlowRouting(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean commit_markers, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.outputOnePageSequence(RenderingContext rc, IntermediateFormatHeader psheader)
+   at ibex4.creation.PDFCreator.outputPageSequenceOrPageSequenceWrapper(RenderingContext rc, IntermediateFormatHeader header)
+   at ibex4.creation.PDFCreator.createDocument(RenderingContext rc)
+   at ibex4.logical.FODocument_Implementation.commonCreationAndClose(RenderingContext rc, IntermediateFormatCreator intermediate_format_creator, Boolean close_output_stream, Stream output_stream, String xsl_swap_file_name, Stream fo_stream)
+   at ibex4.logical.FODocument_Implementation.generateStreams(Stream xml_stream, Stream xsl_stream, Stream output_stream, Boolean closeOutputStream, Hashtable xsltParams)
+   at ibex4.logical.FODocument_Implementation.generate(Stream documentStream, Stream xslStream, Stream PDFStream, Boolean closeOutputStream)
+   at ibex4.FODocument.generate(Stream xml, Stream xsl, Stream pdf, Boolean closeOutputStream)
+   at Cutting.BusinessLogic.PdfExport.Commands.GeneratePdfCommandHandler.Handle(GeneratePdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/PdfExport/Commands/GeneratePdfCommand.cs:line 32
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at Cutting.BusinessLogic.Avisos.Commands.ExportAvisoToPdfCommandHandler.Handle(ExportAvisoToPdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Avisos/Commands/ExportAvisoToPdfCommand.cs:line 45
+   at Cutting.Common.Decorators.ValidateCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/ValidateCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.HandleCommand(HttpContext context, ICqrsOptions options)
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.InvokeCore(HttpContext context, PathString matchedPath, PathString remainingPath)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ibex4.exceptions.IbexException: TypeInitializationException The type initializer for 'Gdip' threw an exception.
+   at ibex4.imageloaders.ImageLoader.load(RenderingContext rc, ObjectWithAttributes containing_fo, String fileName, Int32 selectedPage)
+   at ibex4.renderer.RenderingContext.getImage(String url, ObjectWithAttributes containing_fo, Int32 dpi, ExtendedMap`2 raw_attributes)
+   at ibex4.xml.tags.ExternalGraphicTag.start(RenderingContext rc, XMLContext context, ExtendedMap`2 attrs)
+   at ibex4.reading.ps.FlowReader.advance(RenderingContext rc, Int32 desiredElements)
+   at ibex4.reading.ps.MultiFlowReader.advance(RenderingContext rc, Int32 nodesToRead, ObjectWithAttributes[] stackbase)
+   at ibex4.creation.PDFCreator.layoutOneRegion(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.layoutAllRegionsInFlowRouting(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean commit_markers, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.outputOnePageSequence(RenderingContext rc, IntermediateFormatHeader psheader)
+   at ibex4.creation.PDFCreator.outputPageSequenceOrPageSequenceWrapper(RenderingContext rc, IntermediateFormatHeader header)
+   at ibex4.creation.PDFCreator.createDocument(RenderingContext rc)
+   at ibex4.logical.FODocument_Implementation.commonCreationAndClose(RenderingContext rc, IntermediateFormatCreator intermediate_format_creator, Boolean close_output_stream, Stream output_stream, String xsl_swap_file_name, Stream fo_stream)
+   at ibex4.logical.FODocument_Implementation.generateStreams(Stream xml_stream, Stream xsl_stream, Stream output_stream, Boolean closeOutputStream, Hashtable xsltParams)
+   at ibex4.logical.FODocument_Implementation.generate(Stream documentStream, Stream xslStream, Stream PDFStream, Boolean closeOutputStream)
+   at ibex4.FODocument.generate(Stream xml, Stream xsl, Stream pdf, Boolean closeOutputStream)
+   at Cutting.BusinessLogic.PdfExport.Commands.GeneratePdfCommandHandler.Handle(GeneratePdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/PdfExport/Commands/GeneratePdfCommand.cs:line 32
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at Cutting.BusinessLogic.Avisos.Commands.ExportAvisoToPdfCommandHandler.Handle(ExportAvisoToPdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Avisos/Commands/ExportAvisoToPdfCommand.cs:line 45
+   at Cutting.Common.Decorators.ValidateCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/ValidateCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.HandleCommand(HttpContext context, ICqrsOptions options)
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.InvokeCore(HttpContext context, PathString matchedPath, PathString remainingPath)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ibex4.exceptions.IbexException: TypeInitializationException The type initializer for 'Gdip' threw an exception.
+   at ibex4.imageloaders.ImageLoader.load(RenderingContext rc, ObjectWithAttributes containing_fo, String fileName, Int32 selectedPage)
+   at ibex4.renderer.RenderingContext.getImage(String url, ObjectWithAttributes containing_fo, Int32 dpi, ExtendedMap`2 raw_attributes)
+   at ibex4.xml.tags.ExternalGraphicTag.start(RenderingContext rc, XMLContext context, ExtendedMap`2 attrs)
+   at ibex4.reading.ps.FlowReader.advance(RenderingContext rc, Int32 desiredElements)
+   at ibex4.reading.ps.MultiFlowReader.advance(RenderingContext rc, Int32 nodesToRead, ObjectWithAttributes[] stackbase)
+   at ibex4.creation.PDFCreator.layoutOneRegion(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.layoutAllRegionsInFlowRouting(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean commit_markers, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.outputOnePageSequence(RenderingContext rc, IntermediateFormatHeader psheader)
+   at ibex4.creation.PDFCreator.outputPageSequenceOrPageSequenceWrapper(RenderingContext rc, IntermediateFormatHeader header)
+   at ibex4.creation.PDFCreator.createDocument(RenderingContext rc)
+   at ibex4.logical.FODocument_Implementation.commonCreationAndClose(RenderingContext rc, IntermediateFormatCreator intermediate_format_creator, Boolean close_output_stream, Stream output_stream, String xsl_swap_file_name, Stream fo_stream)
+   at ibex4.logical.FODocument_Implementation.generateStreams(Stream xml_stream, Stream xsl_stream, Stream output_stream, Boolean closeOutputStream, Hashtable xsltParams)
+   at ibex4.logical.FODocument_Implementation.generate(Stream documentStream, Stream xslStream, Stream PDFStream, Boolean closeOutputStream)
+   at ibex4.FODocument.generate(Stream xml, Stream xsl, Stream pdf, Boolean closeOutputStream)
+   at Cutting.BusinessLogic.PdfExport.Commands.GeneratePdfCommandHandler.Handle(GeneratePdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/PdfExport/Commands/GeneratePdfCommand.cs:line 32
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at Cutting.BusinessLogic.Avisos.Commands.ExportAvisoToPdfCommandHandler.Handle(ExportAvisoToPdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Avisos/Commands/ExportAvisoToPdfCommand.cs:line 45
+   at Cutting.Common.Decorators.ValidateCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/ValidateCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.HandleCommand(HttpContext context, ICqrsOptions options)
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.InvokeCore(HttpContext context, PathString matchedPath, PathString remainingPath)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ibex4.exceptions.IbexException: TypeInitializationException The type initializer for 'Gdip' threw an exception.
+   at ibex4.imageloaders.ImageLoader.load(RenderingContext rc, ObjectWithAttributes containing_fo, String fileName, Int32 selectedPage)
+   at ibex4.renderer.RenderingContext.getImage(String url, ObjectWithAttributes containing_fo, Int32 dpi, ExtendedMap`2 raw_attributes)
+   at ibex4.xml.tags.ExternalGraphicTag.start(RenderingContext rc, XMLContext context, ExtendedMap`2 attrs)
+   at ibex4.reading.ps.FlowReader.advance(RenderingContext rc, Int32 desiredElements)
+   at ibex4.reading.ps.MultiFlowReader.advance(RenderingContext rc, Int32 nodesToRead, ObjectWithAttributes[] stackbase)
+   at ibex4.creation.PDFCreator.layoutOneRegion(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.layoutAllRegionsInFlowRouting(AreaStack stack, RenderingContext rc, FlowRouting flow_routing, Boolean commit_markers, Boolean writing_static_content)
+   at ibex4.creation.PDFCreator.outputOnePageSequence(RenderingContext rc, IntermediateFormatHeader psheader)
+   at ibex4.creation.PDFCreator.outputPageSequenceOrPageSequenceWrapper(RenderingContext rc, IntermediateFormatHeader header)
+   at ibex4.creation.PDFCreator.createDocument(RenderingContext rc)
+   at ibex4.logical.FODocument_Implementation.commonCreationAndClose(RenderingContext rc, IntermediateFormatCreator intermediate_format_creator, Boolean close_output_stream, Stream output_stream, String xsl_swap_file_name, Stream fo_stream)
+   at ibex4.logical.FODocument_Implementation.generateStreams(Stream xml_stream, Stream xsl_stream, Stream output_stream, Boolean closeOutputStream, Hashtable xsltParams)
+   at ibex4.logical.FODocument_Implementation.generate(Stream documentStream, Stream xslStream, Stream PDFStream, Boolean closeOutputStream)
+   at ibex4.FODocument.generate(Stream xml, Stream xsl, Stream pdf, Boolean closeOutputStream)
+   at Cutting.BusinessLogic.PdfExport.Commands.GeneratePdfCommandHandler.Handle(GeneratePdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/PdfExport/Commands/GeneratePdfCommand.cs:line 32
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at Cutting.BusinessLogic.Avisos.Commands.ExportAvisoToPdfCommandHandler.Handle(ExportAvisoToPdfCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Avisos/Commands/ExportAvisoToPdfCommand.cs:line 45
+   at Cutting.Common.Decorators.ValidateCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/ValidateCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.AuthorizeCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/AuthorizeCommandDecorator.cs:line 90
+   at Cutting.BusinessLogic.Common.Decorators.SingleSessionCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.BusinessLogic/Common/Decorators/SingleSessionCommandDecorator.cs:line 55
+   at Cutting.Common.Decorators.LogCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/LogCommandDecorator.cs:line 97
+   at Cutting.Common.Decorators.HandheldCommandDecorator`2.Handle(TCommand command) in /home/gitlab-runner/builds/GpKqhuNV/0/project_01/subproject_02/backend/Cutting.Common/Decorators/HandheldCommandDecorator.cs:line 56
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.HandleCommand(HttpContext context, ICqrsOptions options)
+   at CoreSharp.Cqrs.AspNetCore.CommandHandlerMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.InvokeCore(HttpContext context, PathString matchedPath, PathString remainingPath)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)

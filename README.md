@@ -66,6 +66,8 @@ Tailon is a webapp for looking at and searching through files and streams.
   -h, --help                   Show this help message and exit
   -e, --help-config            Show configuration file help and exit
   -r, --relative-root string   webapp relative root (default "/")
+  --lines-to-tail	       initial lines tail will display
+  --history-lines	       maximum lines displayed at once in teh GUI terminal
 
 Tailon can be configured through a config file or with command-line flags.
 
@@ -97,6 +99,7 @@ Example usage:
   tailon file1.txt file2.txt file3.txt
   tailon alias=messages,/var/log/messages "/var/log/*.log"
   tailon -b localhost:8080,localhost:8081 -c config.toml
+  tailon testdata/ex1/var/log/* -b localhost:9001 --lines-to-tail 102 --history-lines 2030
 
 For information on usage through the configuration file, please refer to the
 '--help-config' option.

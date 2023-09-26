@@ -18,13 +18,16 @@
 
   # how many lines of code are displayed at once in the GUI terminal
   # 0 means all of them
-  lines-of-history = 0
-  
+  lines-of-history = 3000
+ 
+  # how many lines will tail start with. +1 means all of tehm, aka, start at the first line
+  lines-to-tail = 3000
+ 
   [commands]
 
     [commands.tail]
-#    action = ["tail", "-n", "$lines", "-F", "$path"]
-    action = ["tail", "-n", "500", "-F", "$path"]
+    action = ["tail", "-n", "$lines", "-F", "$path"]
+#    action = ["tail", "-n", "+1", "-F", "$path"]
     [commands.grep]
     stdin = "tail"
     action = ["grep", "--text", "--line-buffered", "--color=never", "-i", "-e", "$script"]
