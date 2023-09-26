@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  tailon_${app_name}:
+    container_name: tailon_${app_name}
+    image: ${docker_image}
+    ports:
+      - "9001:8080"
+    volumes:
+      - "./logs_tailon:/logs_tailon"
+      - "./tailon.toml:/tailon/tailon.toml"
+    command: /logs_tailon/* -c /tailon/tailong.toml
+    restart: unless-stopped

@@ -62,7 +62,7 @@ Tailon is a webapp for looking at and searching through files and streams.
 
   -a, --allow-download         allow file downloads (default true)
   -b, --bind string            Listen on the specified address and port (default ":8080")
-  -c, --config string
+  -c, --config string          config file. See tempalte for values
   -h, --help                   Show this help message and exit
   -e, --help-config            Show configuration file help and exit
   -r, --relative-root string   webapp relative root (default "/")

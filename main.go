@@ -102,6 +102,10 @@ const defaultTomlConfig = `
   allow-download = true
   allow-commands = ["tail", "grep", "sed", "awk"]
 
+  [files]
+    file = "stdata/ex1/var/log/"
+    #filei2 = "alias=test,group=test_group,log.log"
+
   [commands]
 
     [commands.tail]
@@ -130,7 +134,7 @@ type CommandSpec struct {
 	Default string
 }
 
-func parseTomlConfig(config string) (*toml.Tree, map[string]CommandSpec) {
+func parseTomlConfig(config string) (*toml.Tree, map[string]CommandSpec, []FileSpec) {
 	cfg, err := toml.Load(config)
 	if err != nil {
 		log.Fatal("Error parsing config: ", err)
@@ -147,8 +151,23 @@ func parseTomlConfig(config string) (*toml.Tree, map[string]CommandSpec) {
 		}
 		commands[key] = command
 	}
+	println(cfg.Get("files"))
+        cfgFiles := cfg.Get("files").(*toml.Tree).ToMap()
+	filespecs := make([]FileSpec, 0)
+	for _, value := range cfgFiles {
+        if value == nil {
+            continue
+        }
+        strvalue := fmt.Sprint(value)
+		if file, err := parseFileSpec(strvalue); err != nil {
+			fmt.Fprintf(os.Stderr, "Error parsing argument '%s': %s\n", strvalue, err)
+			os.Exit(1)
+		} else {
+            filespecs = append(filespecs, file)
+		}
+	}
 
-	return cfg, commands
+	return cfg, commands, filespecs
 }
 
 // FileSpec is an instance of a file to be monitored. These are mapped to
@@ -225,7 +244,7 @@ type Config struct {
 }
 
 func makeConfig(configContent string) *Config {
-	defaults, commandSpecs := parseTomlConfig(configContent)
+	defaults, commandSpecs, fileSpecs := parseTomlConfig(configContent)
 
 	// Convert the list of bind addresses from []interface{} to []string.
 	addrsA := defaults.Get("listen-addr").([]interface{})
@@ -241,6 +260,7 @@ func makeConfig(configContent string) *Config {
                 LinesOfHistory: defaults.Get("lines-of-history").(int64),
 		AllowDownload: defaults.Get("allow-download").(bool),
 		CommandSpecs:  commandSpecs,
+                FileSpecs:     fileSpecs,
 	}
 
 	mapstructure.Decode(defaults.Get("allow-commands"), &config.AllowCommandNames)
@@ -260,7 +280,7 @@ func main() {
 	flag.BoolVarP(&config.AllowDownload, "allow-download", "a", config.AllowDownload, "allow file downloads")
         flag.Int64Var(&config.LinesToTail, "lines-to-tail", config.LinesToTail, "No. of lines to tail.")
         flag.Int64Var(&config.LinesOfHistory, "history-lines", config.LinesOfHistory, "No. of history lines to tail.")
-	flag.StringVarP(&config.ConfigPath, "config", "c", "", "")
+	flag.StringVarP(&config.ConfigPath, "config", "c", "", "Config.toml file location.")
 	flag.Parse()
 
 	flag.Usage = func() {
@@ -304,9 +324,12 @@ func main() {
 			os.Exit(1)
 		} else {
 			filespecs = append(filespecs, filespec)
+                        config.FileSpecs = append(filespecs, filespec) // from joshuaboniface fork
+			filespecs = append(filespecs, filespec) // original one
+			config.FileSpecs = filespecs // this wasn't here. It was on 319
 		}
 	}
-	config.FileSpecs = filespecs
+	// config.FileSpecs = filespecs - was here
 
 	if len(config.FileSpecs) == 0 {
 		fmt.Fprintln(os.Stderr, "No files specified on command-line or in config file")
