@@ -8,7 +8,7 @@ RUN apk add --upgrade binutils
 
 RUN cd /tailon && \
     go get
-RUN go build -tags dev
+RUN go build 
 RUN strip tailon
 
 RUN apk del binutils
@@ -19,7 +19,7 @@ RUN apk add gawk grep sed
 
 #COPY --from=build /tailon/tailon /usr/local/bin/tailon
 COPY --from=build /tailon/tailon /tailon/tailon
-COPY --from=build /tailon/frontend/ /tailon/frontend/
+#COPY --from=build /tailon/frontend/ /tailon/frontend/
 
 CMD        ["--help"]
 #CMD ["tail", "-f", "/dev/null"]
