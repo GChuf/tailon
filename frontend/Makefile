@@ -77,6 +77,7 @@ endif
 
 # go get -u github.com/shurcooL/vfsgen/cmd/vfsgendev
 assets_vfsdata.go:
-	cd .. && vfsgendev  -source=\"tailon/frontend\".Assets && mv $@ frontend/
+#	cd .. && vfsgendev  -source=\"tailon/frontend\".Assets && mv $@ frontend/
+	cd .. && ~/go/bin/vfsgendev  -source=\"tailon/frontend\".Assets && mv $@ frontend/
 
 .PHONY: all clean watch du assets_vfsdata.go
