@@ -19,7 +19,7 @@
   lines-to-tail = 103
 
   # Commands that will appear in the UI.
-  allow-commands = ["tail", "grep", "sed", "awk"]
+  allow-commands = ["tail", "grep", "sed", "awk", "pwsh"]
 
   # File, glob and dir filespecs are similar in principle to their
   # command-line counterparts.
@@ -44,4 +44,7 @@
     stdin = "tail"
     action = ["awk", "--sandbox", "$script"]
     default = "{print $0; fflush()}"
+
+    [commands.pwsh]
+    action = ["powershell", "-Command", "Get-Content", "$path", "-tail", "$lines", "-wait"]
 
