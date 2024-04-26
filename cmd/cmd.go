@@ -199,10 +199,22 @@ func (c *Cmd) Stop() error {
 	// status.Complete = false
 	c.stopped = true
 
-	// Signal the process group (-pid), not just the process, so that the process
-	// and all its children are signaled. Else, child procs can keep running and
-	// keep the stdout/stderr fd open and cause cmd.Wait to hang.
-	return syscall.Kill(-c.status.PID, syscall.SIGTERM)
+
+	if runtime.GOOS == "windows" {
+		// Use taskkill command to terminate the process
+		cmd := exec.Command("taskkill", "/F", "/T", "/PID", fmt.Sprint(c.status.PID))
+		err := cmd.Run()
+		if err != nil {
+			return err
+		}
+    	return nil
+	} else {
+		// Signal the process group (-pid), not just the process, so that the process
+		// and all its children are signaled. Else, child procs can keep running and
+		// keep the stdout/stderr fd open and cause cmd.Wait to hang.
+		return syscall.Kill(-c.status.PID, syscall.SIGTERM)
+	}
+
 }
 
 // Status returns the Status of the command at any time. It is safe to call
@@ -273,11 +285,18 @@ func (c *Cmd) run() {
 	// Setup command
 	// //////////////////////////////////////////////////////////////////////
 	cmd := exec.Command(c.Name, c.Args...)
+	// cmd := exec.Command("powershell", "-Command", "Get-Process")
+	// Get-Content pings.log -tail 10 -wait
 
-	// Set process group ID so the cmd and all its children become a new
-	// process group. This allows Stop to SIGTERM the cmd's process group
-	// without killing this process (i.e. this code here).
-	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+
+	if runtime.GOOS != "windows" {
+		// Set process group ID so the cmd and all its children become a new
+		// process group. This allows Stop to SIGTERM the cmd's process group
+		// without killing this process (i.e. this code here).
+		cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+	}
+
+
 
 	if c.Stdin != nil {
 		cmd.Stdin = c.Stdin

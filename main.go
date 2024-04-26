@@ -120,6 +120,10 @@ const defaultTomlConfig = `
     stdin = "tail"
     action = ["awk", "--sandbox", "$script"]
     default = "{print $0; fflush()}"
+
+	[commands.pwsh]
+    action = ["powershell", "-Command", "Get-Content", "$path", "-tail", "$lines", "-wait"]
+
 `
 
 // CommandSpec defines a command that the server can execute.
