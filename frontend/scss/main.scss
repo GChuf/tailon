@@ -3,8 +3,7 @@
 
 body {
   font: 13px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;
-  overflow: hidden;
-  height: 100vh;
+  overflow-x: hidden;
   background-color: $tailon-logview-background-color;
   width: 100%;
 }
