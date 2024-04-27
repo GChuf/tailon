@@ -59,7 +59,12 @@ Vue.component('logview', {
         write: function (source, line) {
             var span;
             if (source === "o") {
-                line = escapeHtml(line).replace(/\n$/, '');
+                if (line.length === 0) {
+                    line = "&nbsp;";
+                } else {
+                    line = escapeHtml(line).replace(/\n$/, '');
+                }
+
                 span = this.createLogEntrySpan(line);
 
                 this.writeSpans([span]);
