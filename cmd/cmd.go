@@ -52,6 +52,7 @@ import (
 	"syscall"
 	"time"
 	"runtime"
+	"os"
 )
 
 // Cmd represents an external command, similar to the Go built-in os/exec.Cmd.
@@ -200,21 +201,19 @@ func (c *Cmd) Stop() error {
 	// status.Complete = false
 	c.stopped = true
 
-
-	if runtime.GOOS == "windows" {
-		// Use taskkill command to terminate the process
-		cmd := exec.Command("taskkill", "/F", "/T", "/PID", fmt.Sprint(c.status.PID))
-		err := cmd.Run()
-		if err != nil {
-			return err
-		}
-    	return nil
-	} else {
-		// Signal the process group (-pid), not just the process, so that the process
-		// and all its children are signaled. Else, child procs can keep running and
-		// keep the stdout/stderr fd open and cause cmd.Wait to hang.
-		return syscall.Kill(-c.status.PID, syscall.SIGTERM)
+	// Signal the process group (-pid), not just the process, so that the process
+	// and all its children are signaled. Else, child procs can keep running and
+	// keep the stdout/stderr fd open and cause cmd.Wait to hang.
+	process, err := os.FindProcess(-c.status.PID)
+	if err != nil {
+		return err
 	}
+	err = process.Signal(syscall.SIGTERM)
+	if err != nil {
+		return err
+	}
+	return nil
+	
 
 }
 
