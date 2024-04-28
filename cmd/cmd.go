@@ -51,6 +51,7 @@ import (
 	"sync"
 	"syscall"
 	"time"
+	"runtime"
 )
 
 // Cmd represents an external command, similar to the Go built-in os/exec.Cmd.
