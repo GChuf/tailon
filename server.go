@@ -152,12 +152,8 @@ func wsWriter(session sockjs.Session, messages chan string, done <-chan struct{}
 				log.Print("Running command: ", actionB)
 
 				// Start streaming procB's stdout and stderr to the client.
+				go streamOutput(procA, procB, session)
 
-				if runtime.GOOS == "windows" {
-					go streamOutputWindows(procA, procB, session)
-				} else {
-					go streamOutput(procA, procB, session)
-				}
 			}
 		case <-done:
 			killProcs(procA, procB)
@@ -200,39 +196,6 @@ func streamOutput(procA *exec.Cmd, procB *cmd.Cmd, session sockjs.Session) {
 	for {
 		select {
 		case line := <-procB.Stdout:
-			msg := []string{"o", line}
-			data, _ := json.Marshal(msg)
-			session.Send(string(data))
-		case line := <-procB.Stderr:
-			msg := []string{"e", line}
-			data, _ := json.Marshal(msg)
-			session.Send(string(data))
-		case <-statusChan:
-		}
-	}
-}
-
-func streamOutputWindows(procA *exec.Cmd, procB *cmd.Cmd, session sockjs.Session) {
-	if procA != nil {
-		procB.Stdin, _ = procA.StdoutPipe()
-		procA.Start()
-	}
-
-	statusChan := procB.Start()
-
-    // Use a boolean flag to track the first iteration
-    isFirstIteration := true
-
-	for {
-		select {
-		case line := <-procB.Stdout:
-
-			//always skip first line on windows platforms
-			if isFirstIteration {
-				isFirstIteration = false
-				continue
-			}
-
 			msg := []string{"o", line}
 			data, _ := json.Marshal(msg)
 			session.Send(string(data))
