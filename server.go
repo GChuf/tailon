@@ -15,6 +15,7 @@ import (
 	"os/exec"
 	"strconv"
 	"time"
+	"runtime"
 )
 
 func setupRoutes(relativeroot string) *http.ServeMux {
@@ -206,7 +207,7 @@ func streamOutput(procA *exec.Cmd, procB *cmd.Cmd, session sockjs.Session) {
 			msg := []string{"e", line}
 			data, _ := json.Marshal(msg)
 			session.Send(string(data))
-		//case <-statusChan:
+		case <-statusChan:
 		}
 	}
 }
@@ -231,7 +232,7 @@ func streamOutputWindows(procA *exec.Cmd, procB *cmd.Cmd, session sockjs.Session
 				isFirstIteration = false
 				continue
 			}
-	
+
 			msg := []string{"o", line}
 			data, _ := json.Marshal(msg)
 			session.Send(string(data))
@@ -239,7 +240,7 @@ func streamOutputWindows(procA *exec.Cmd, procB *cmd.Cmd, session sockjs.Session
 			msg := []string{"e", line}
 			data, _ := json.Marshal(msg)
 			session.Send(string(data))
-		//case <-statusChan:
+		case <-statusChan:
 		}
 	}
 }
