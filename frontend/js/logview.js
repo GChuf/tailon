@@ -46,14 +46,8 @@ Vue.component('logview', {
             }
         },
 
-        isScrolledToBottom: function () {
-            var elParent = this.$el.parentElement;
-            var autoScrollOffset = elParent.scrollTop - (elParent.scrollHeight - elParent.offsetHeight);
-            return Math.abs(autoScrollOffset) < 50;
-        },
-
         scroll: function() {
-            this.$el.parentElement.scrollTop = this.$el.parentElement.scrollHeight;
+            window.scrollTo(0, document.body.scrollHeight);
         },
 
         write: function (source, line) {
@@ -76,8 +70,6 @@ Vue.component('logview', {
                 return;
             }
 
-            var scrollAfterWrite = this.isScrolledToBottom();
-
             // Create spans from all elements and add them to a temporary DOM.
             var fragment = document.createDocumentFragment();
 
@@ -93,7 +85,7 @@ Vue.component('logview', {
             this.$el.appendChild(fragment);
             this.trimHistory();
 
-            if (this.autoScroll && scrollAfterWrite) {
+            if (this.autoScroll) {
                 this.scroll();
             }
 
