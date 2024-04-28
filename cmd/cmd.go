@@ -52,6 +52,7 @@ import (
 	"syscall"
 	"time"
 	"runtime"
+	"os"
 )
 
 // Cmd represents an external command, similar to the Go built-in os/exec.Cmd.
@@ -203,7 +204,15 @@ func (c *Cmd) Stop() error {
 	// Signal the process group (-pid), not just the process, so that the process
 	// and all its children are signaled. Else, child procs can keep running and
 	// keep the stdout/stderr fd open and cause cmd.Wait to hang.
-	return syscall.Kill(-c.status.PID, syscall.SIGTERM)
+	process, err := os.FindProcess(-c.status.PID)
+	if err != nil {
+		return err
+	}
+	err = process.Signal(syscall.SIGTERM)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // Status returns the Status of the command at any time. It is safe to call
