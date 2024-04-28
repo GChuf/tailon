@@ -213,7 +213,6 @@ func (c *Cmd) Stop() error {
 		return err
 	}
 	return nil
-	
 
 }
 
