@@ -51,8 +51,6 @@ import (
 	"sync"
 	"syscall"
 	"time"
-	"runtime"
-	"os"
 )
 
 // Cmd represents an external command, similar to the Go built-in os/exec.Cmd.
@@ -197,22 +195,7 @@ func (c *Cmd) Stop() error {
 		return nil
 	}
 
-	// Flag that command was stopped, it didn't complete. This results in
-	// status.Complete = false
-	c.stopped = true
-
-	// Signal the process group (-pid), not just the process, so that the process
-	// and all its children are signaled. Else, child procs can keep running and
-	// keep the stdout/stderr fd open and cause cmd.Wait to hang.
-	process, err := os.FindProcess(-c.status.PID)
-	if err != nil {
-		return err
-	}
-	err = process.Signal(syscall.SIGTERM)
-	if err != nil {
-		return err
-	}
-	return nil
+	return terminatePID(c.status.PID)
 
 }
 
@@ -288,12 +271,8 @@ func (c *Cmd) run() {
 	// Get-Content pings.log -tail 10 -wait
 
 
-	if runtime.GOOS != "windows" {
-		// Set process group ID so the cmd and all its children become a new
-		// process group. This allows Stop to SIGTERM the cmd's process group
-		// without killing this process (i.e. this code here).
-		cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
-	}
+
+	setGroupID(cmd)
 
 
 
