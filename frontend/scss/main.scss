@@ -31,6 +31,11 @@ body {
 
   align-content: stretch;
   align-items: center;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 
 .toolbar-item {
@@ -188,6 +193,8 @@ div #command-select {
   white-space: pre;
   overflow: auto;
   padding-left: 5px;
+  top: 35px;
+  position: relative;
 }
 
 .log-view {
