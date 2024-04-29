@@ -3,8 +3,8 @@
 package cmd
 
 import (
-	"fmt"
 	"syscall"
+	"os/exec"
 )
 
 func terminatePID(pid int) error {
@@ -12,7 +12,7 @@ func terminatePID(pid int) error {
 	// and all its children are signaled. Else, child procs can keep running and
 	// keep the stdout/stderr fd open and cause cmd.Wait to hang.
 	return syscall.Kill(-pid, syscall.SIGTERM)
-	
+
 }
 
 func setGroupID(cmd *exec.Cmd) {
