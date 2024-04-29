@@ -13,10 +13,10 @@
 
   # how many lines of code are displayed at once in the GUI terminal
   # 0 means all of them
-  lines-of-history = 3001
+  lines-of-history = 0
  
   # Number of lines to innitially show when tailing. If you want ALL of them, you must manually change the tail command, and insert "+1" instead of "$lines" in the conf file 
-  lines-to-tail = 103
+  lines-to-tail = 10
 
   # Commands that will appear in the UI.
   allow-commands = ["tail", "grep", "sed", "awk", "pwsh"]
@@ -28,8 +28,11 @@
   [commands]
 
     [commands.tail]
-    action = ["tail", "-n", "$lines", "-F", "$path"]
-#    action = ["tail", "-n", "500", "-F", "$path"]
+#   action = ["tail", "-n", "$lines", "-F", "$path"] # tail 10 lines initially, and show up to "lines-of-history"
+#   action = ["tail", "-n", "+1", "-F", "$path"] # tail all lines initially, and show up to "lines-of-history"
+    action = ["tail", "-n", "+1", "-F", "$path"]
+
+  
     [commands.grep]
     stdin = "tail"
     action = ["grep", "--text", "--line-buffered", "--color=never", "-i", "-e", "$script"]
