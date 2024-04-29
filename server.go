@@ -15,7 +15,6 @@ import (
 	"os/exec"
 	"strconv"
 	"time"
-	"runtime"
 )
 
 func setupRoutes(relativeroot string) *http.ServeMux {
