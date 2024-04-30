@@ -53,7 +53,7 @@ Vue.component('logview', {
 
             lineArray.forEach((line) => {
                 if (line.length === 0) {
-                    line = "&nbsp;";
+                    line = "\n";
                 } else {
                     line = escapeHtml(line);
                     line += "\n"; //adds new lines so that copy-pasting text works as intended
