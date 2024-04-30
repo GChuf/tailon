@@ -6,7 +6,8 @@ Vue.component('logview', {
             history: [],
             lastSpan: null,
             lastSpanClasses: '',
-            autoScroll: true
+            autoScroll: true,
+            scrolling: false
         };
     },
     watch: {
@@ -46,10 +47,6 @@ Vue.component('logview', {
             }
         },
 
-        scroll: function() {
-            window.scrollTo(0, document.body.scrollHeight);
-        },
-
         write: function (source, line) {
             var span;
             if (source === "o") {
@@ -83,16 +80,22 @@ Vue.component('logview', {
             }
 
             this.$el.appendChild(fragment);
-            this.trimHistory();
 
-            if (this.autoScroll) {
-                this.scroll();
+            if (this.autoScroll && !this.scrolling) {
+                this.scrolling = true;
+                setTimeout(() => {
+                    window.scrollTo(0, document.body.scrollHeight);
+                    this.scrolling = false;
+                }, 0);
             }
+
+            this.trimHistory();
 
             this.lastSpan = this.history[this.history.length-1];
             this.lastSpanClasses = this.lastSpan.className;
             this.lastSpan.className = this.lastSpanClasses + ' log-entry-current';
 
         }
+
     }
 });
