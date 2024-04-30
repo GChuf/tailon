@@ -151,7 +151,7 @@ func wsWriter(session sockjs.Session, messages chan string, done <-chan struct{}
 				log.Print("Running command: ", actionB)
 
 				// Start streaming procB's stdout and stderr to the client.
-				go streamOutput(procA, procB, session)
+				go streamBatchedOutput(procA, procB, session)
 
 			}
 		case <-done:
@@ -206,6 +206,44 @@ func streamOutput(procA *exec.Cmd, procB *cmd.Cmd, session sockjs.Session) {
 		}
 	}
 }
+
+// Goroutine that streams batched command stdout to the client.
+func streamBatchedOutput(procA *exec.Cmd, procB *cmd.Cmd, session sockjs.Session) {
+    if procA != nil {
+        procB.Stdin, _ = procA.StdoutPipe()
+        procA.Start()
+    }
+
+    statusChan := procB.Start()
+
+    outputBatch := []string{}
+    flushTicker := time.NewTicker(15 * time.Millisecond)
+
+    flushOutput := func() {
+		if len(outputBatch) >= 1 { //don't automatically send every period
+			outputLine, _ := json.Marshal(outputBatch)
+			session.Send(string(outputLine))
+			outputBatch = nil
+		}
+    }
+
+    for {
+        select {
+        case line := <-procB.Stdout:
+            outputBatch = append(outputBatch, line)
+            if len(outputBatch) >= 100 {
+                flushOutput()
+            }
+        case <-statusChan:
+            flushOutput() // Flush any remaining output before exiting
+            flushTicker.Stop()
+            return
+        case <-flushTicker.C:
+            flushOutput() // Flush periodically
+        }
+    }
+}
+
 
 func killProcs(procA *exec.Cmd, procB *cmd.Cmd) {
 	if procA != nil {

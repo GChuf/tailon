@@ -47,9 +47,11 @@ Vue.component('logview', {
             }
         },
 
-        write: function (source, line) {
+        write: function (lineArray) {
+            var spanArray = [];
             var span;
-            if (source === "o") {
+
+            lineArray.forEach((line) => {
                 if (line.length === 0) {
                     line = "&nbsp;";
                 } else {
@@ -57,9 +59,11 @@ Vue.component('logview', {
                 }
 
                 span = this.createLogEntrySpan(line);
+                spanArray.push(span);
+            });
 
-                this.writeSpans([span]);
-            }
+            this.writeSpans(spanArray);
+
         },
 
         writeSpans: function (spanArray) {

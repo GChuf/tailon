@@ -79,7 +79,6 @@ var app = new Vue({
         },
         onBackendMessage: function (message) {
             var data = JSON.parse(message.data);
-
             if (data.constructor === Object) {
                 // Reshape into something that vue-multiselect :group-select can use.
                 var fileList = [];
@@ -98,9 +97,7 @@ var app = new Vue({
                     this.file = fileList[0].files[0];
                 }
             } else {
-                var stream = data[0];
-                var line = data[1];
-                this.$refs.logview.write(stream, line);
+                this.$refs.logview.write(data);
             }
         },
         refreshFiles: function () {
