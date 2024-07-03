@@ -1,44 +1,31 @@
-go mod init github.com/gchuf/tailon
-go mod tidy
-go build *.go
-go build github.com/gchuf/tailon
+#https://go.dev/dl/
+wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
+tar -xvf /go1.22.5.linux-amd64.tar.gz
+mv go /usr/local/go
+
+export PATH=$PATH:/usr/local/go/bin
+
+go install github.com/shurcooL/vfsgen/cmd/vfsgendev@latest
+mv ~/go/bin/vfsgendev /usr/local/go/bin
 
 
----
+apt install build-essential
 
-apt install python2
+
+#go mod init github.com/gchuf/tailon
+#go mod tidy
+#go build *.go
+#go build github.com/gchuf/tailon
+
+
+apt install python2 
+
+
+
+
 cd frontend
 npm install / npm ci
-(bump node sass cuz errors, to work with your node version)
-
-
 cd ..
 make frontend
-
-
-#missing vsgendev
-#cd GOROOT
-#cd /snap/go/9028/src
-#go get -u github.com/shurcooL/vfsgen
-https://stackoverflow.com/questions/30295146/how-can-i-install-a-package-with-go-get
-
-#get gopath and goroot in env
-printenv
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-Note that since Go 1.17 installing packages with go get is deprecated:
-Use go install instead:
-
-#do
-go install github.com/shurcooL/vfsgen/cmd/vfsgendev@latest
-#after this vfsgendev binary appears inside ~/go/bin
-
-
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-export GOOS=linux
-export GOARCH=amd64
 make
 
